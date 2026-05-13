@@ -26,3 +26,40 @@ def add_product():
 
     except Exception as e:
         messagebox.showerror("Error", str(e))
+    
+    def display_records():
+    listbox.delete(0, END)
+
+    try:
+        if os.path.exists(FILE_NAME):
+            with open(FILE_NAME, "r") as file:
+                records = file.readlines()
+
+                for record in records:
+                    listbox.insert(END, record.strip())
+
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+
+
+def search_product():
+    keyword = entry_search.get()
+
+    listbox.delete(0, END)
+
+    try:
+        with open(FILE_NAME, "r") as file:
+            records = file.readlines()
+
+            found = False
+
+            for record in records:
+                if keyword.lower() in record.lower():
+                    listbox.insert(END, record.strip())
+                    found = True
+
+            if not found:
+                messagebox.showinfo("Search", "Product not found")
+
+    except FileNotFoundError:
+        messagebox.showerror("Error", "No inventory file found")
