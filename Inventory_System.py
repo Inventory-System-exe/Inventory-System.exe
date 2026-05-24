@@ -63,3 +63,71 @@ def search_product():
 
     except FileNotFoundError:
         messagebox.showerror("Error", "No inventory file found")
+
+
+def update_product():
+    name = entry_name.get()
+    new_quantity = entry_quantity.get()
+
+    updated_records = []
+
+    try:
+        with open(FILE_NAME, "r") as file:
+            records = file.readlines()
+
+        found = False
+
+        for record in records:
+            data = record.strip().split(",")
+
+            if data[0] == name:
+                data[2] = new_quantity
+                found = True
+
+            updated_records.append(",".join(data))
+
+        with open(FILE_NAME, "w") as file:
+            for item in updated_records:
+                file.write(item + "\n")
+
+        if found:
+            messagebox.showinfo("Success", "Stock updated successfully")
+        else:
+            messagebox.showerror("Error", "Product not found")
+
+        display_records()
+
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+
+def delete_product():
+    name = entry_name.get()
+
+    updated_records = []
+
+    try:
+        with open(FILE_NAME, "r") as file:
+            records = file.readlines()
+
+        found = False
+
+        for record in records:
+            data = record.strip().split(",")
+
+            if data[0] != name:
+                updated_records.append(record)
+            else:
+                found = True
+
+        with open(FILE_NAME, "w") as file:
+            file.writelines(updated_records)
+
+        if found:
+            messagebox.showinfo("Success", "Product deleted successfully")
+        else:
+            messagebox.showerror("Error", "Product not found")
+
+        display_records()
+
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
