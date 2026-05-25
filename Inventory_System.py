@@ -28,7 +28,7 @@ def add_product():
         messagebox.showerror("Error", str(e))
     
 
-    def display_records():
+def display_records():
     listbox.delete(0, END)
 
     try:
@@ -160,4 +160,26 @@ entry_quantity = Entry(root, width=30)
 entry_quantity.place(x=170, y=110)
 
 entry_price = Entry(root, width=30)
-entry_price.place(x=170, y=150) 
+entry_price.place(x=170, y=150)
+
+Button(root, text="Add Product", width=15, command=add_product).place(x=30, y=200)
+
+Button(root, text="Update Quantity", width=15, command=update_product).place(x=170, y=200)
+
+Button(root, text="Delete Product", width=15, command=delete_product).place(x=320, y=200)
+
+Button(root, text="Display Records", width=15, command=display_records).place(x=470, y=200)
+
+Label(root, text="Search Product").place(x=30, y=260)
+
+entry_search = Entry(root, width=30)
+entry_search.place(x=170, y=260)
+
+Button(root, text="Search", width=15, command=search_product).place(x=420, y=255)
+
+listbox = Listbox(root, width=90, height=12)
+listbox.place(x=30, y=320)
+
+display_records()
+
+root.mainloop()
