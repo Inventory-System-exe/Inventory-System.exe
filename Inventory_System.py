@@ -27,6 +27,7 @@ def add_product():
     except Exception as e:
         messagebox.showerror("Error", str(e))
     
+
     def display_records():
     listbox.delete(0, END)
 
@@ -131,3 +132,32 @@ def delete_product():
 
     except Exception as e:
         messagebox.showerror("Error", str(e))
+
+def clear_fields():
+    entry_name.delete(0, END)
+    entry_unit.delete(0, END)
+    entry_quantity.delete(0, END)
+    entry_price.delete(0, END)
+
+
+
+root = Tk()
+root.title("Inventory Management System")
+root.geometry("700x500")
+
+Label(root, text="Product Name").place(x=30, y=30)
+Label(root, text="Product Unit").place(x=30, y=70)
+Label(root, text="Product Quantity").place(x=30, y=110)
+Label(root, text="Product Price").place(x=30, y=150)
+
+entry_name = Entry(root, width=30)
+entry_name.place(x=170, y=30)
+
+entry_unit = Entry(root, width=30)
+entry_unit.place(x=170, y=70)
+
+entry_quantity = Entry(root, width=30)
+entry_quantity.place(x=170, y=110)
+
+entry_price = Entry(root, width=30)
+entry_price.place(x=170, y=150) 
